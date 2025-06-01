@@ -11,7 +11,6 @@ import edge_tts
 load_dotenv()
 
 app = FastAPI()
-port = int(os.environ.get("PORT", 8000))
 
 app.add_middleware(
     CORSMiddleware,
@@ -67,4 +66,4 @@ async def transcribe_and_ask(file: UploadFile = File(...)):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=port)
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=True)
