@@ -5,21 +5,23 @@ RUN apt-get update && \
     apt-get install -y curl openssl && \
     apt-get clean
 
-# إنشاء مجلد العمل
+# تحديد مجلد العمل
 WORKDIR /app
 
-# نسخ ملفات المشروع وتثبيت المتطلبات
+# نسخ متطلبات المشروع وتثبيتها
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# نسخ باقي ملفات المشروع
 COPY . .
 
-# إنشاء شهادة SSL ذاتية (للاختبار فقط)
+# توليد شهادة SSL (موقعة ذاتيًا)
 RUN openssl req -x509 -nodes -days 365 \
     -subj "/C=SA/ST=Riyadh/L=Riyadh/O=RMG/CN=localhost" \
     -newkey rsa:2048 -keyout key.pem -out cert.pem
 
-# تعيين البورت
+# تحديد المنفذ (HTTPS)
 EXPOSE 443
 
-# تشغيل Uvicorn باستخدام HTTPS
+# تشغيل التطبيق باستخدام Uvicorn عبر HTTPS
 CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "key.pem", "--ssl-certfile", "cert.pem"]
