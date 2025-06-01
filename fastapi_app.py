@@ -67,3 +67,4 @@ async def transcribe_and_ask(file: UploadFile = File(...)):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=True)
+
