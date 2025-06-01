@@ -23,6 +23,6 @@ RUN openssl req -x509 -nodes -days 365 \
 EXPOSE 443
 
 # تشغيل Uvicorn باستخدام HTTPS
-CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile=key.pem", "--ssl-certfile=cert.pem"]
+CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "key.pem", "--ssl-certfile", "cert.pem"]
 
 
