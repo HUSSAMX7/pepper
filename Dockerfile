@@ -19,4 +19,4 @@ ENV GEMINI_API_KEY=${GEMINI_API_KEY}
 EXPOSE 8000
 
 # تشغيل التطبيق باستخدام Uvicorn عبر HTTPS
-CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "443"]
