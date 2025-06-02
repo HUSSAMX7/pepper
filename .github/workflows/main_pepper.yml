@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ghcr.io/${{ secrets.AzureAppService_ContainerUsername_cea8c709b7fe48909ace8d55bc2094fc }}/appsvc/staticsite:${{ github.sha }}
+        tags: ghcr.io/${{ secrets.CR_USERNAME }} /pepper:latest
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,8 @@ jobs:
         app-name: 'pepper'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_9e93868654df48c7bb29c3911ef11c5c }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_cea8c709b7fe48909ace8d55bc2094fc }}/appsvc/staticsite:${{ github.sha }}'
+        images: 'ghcr.io/${{ secrets.CR_USERNAME }}/pepper:latest'
+
+        
+
+        #  images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_cea8c709b7fe48909ace8d55bc2094fc }}/appsvc/staticsite:${{ github.sha }}'
