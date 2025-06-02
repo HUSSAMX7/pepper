@@ -20,9 +20,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-API_KEY = os.getenv("GEMINI_API_KEY")
 model = WhisperModel("turbo", compute_type="int8", device="cpu")  
-client = genai.Client(api_key=API_KEY)
+client = genai.Client(api_key="AIzaSyClqc0iYiPlEkZcKs1Yy3TFV1OS70SOopM")
 
 @app.post("/transcribe")
 async def transcribe_and_ask(file: UploadFile = File(...)):
