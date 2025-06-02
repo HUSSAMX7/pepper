@@ -16,12 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # توليد شهادة SSL (موقعة ذاتيًا)
-RUN openssl req -x509 -nodes -days 365 \
-    -subj "/C=SA/ST=Riyadh/L=Riyadh/O=RMG/CN=localhost" \
-    -newkey rsa:2048 -keyout key.pem -out cert.pem
 
-# تحديد المنفذ (HTTPS)
-EXPOSE 443
+EXPOSE 8000
 
 # تشغيل التطبيق باستخدام Uvicorn عبر HTTPS
-CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "443", "--ssl-keyfile", "key.pem", "--ssl-certfile", "cert.pem"]
+CMD ["uvicorn", "fastapi_app:app", "--host", "0.0.0.0", "--port", "8000"]
