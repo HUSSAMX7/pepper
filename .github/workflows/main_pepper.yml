@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: ghcr.io/${{ secrets.CR_USERNAME }} /pepper:latest
+        tags: ghcr.io/${{ secrets.CR_USERNAME }}/pepper:latest
         file: ./Dockerfile
 
   deploy:
