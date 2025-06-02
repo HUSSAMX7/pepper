@@ -32,7 +32,8 @@ jobs:
         push: true
         tags: ghcr.io/${{ secrets.CR_USERNAME }}/pepper:latest
         file: ./Dockerfile
-
+        build-args: |
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
   deploy:
     runs-on: ubuntu-latest
     needs: build
