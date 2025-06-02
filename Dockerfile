@@ -15,8 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # نسخ باقي ملفات المشروع
 COPY . .
 
-# توليد شهادة SSL (موقعة ذاتيًا)
-
+env GEMINI_API_KEY = ${GEMINI_API_KEY}
 EXPOSE 8000
 
 # تشغيل التطبيق باستخدام Uvicorn عبر HTTPS
