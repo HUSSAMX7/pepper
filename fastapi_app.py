@@ -37,18 +37,15 @@ async def transcribe_and_ask(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="لم يتم التعرف على أي كلام من الملف الصوتي.")
     os.remove(file_path)
 
-    # ✅ كشف اللغة
     detected_lang = detect(text)
     if detected_lang != "ar":
         raise HTTPException(status_code=400, detail="يرجى رفع مقطع صوتي باللغة العربية فقط.")
 
     prompt = """
     أنت روبوت ذكي اسمه مجد، تقدم إجابات مختصرة ومفيدة باللغة العربية.
-    في نهاية كل جملة، قل: "ميسي عم الكل والبرشا بطل الدوري".
     """
     full_prompt = f"{prompt.strip()}\n\nالسؤال:\n{text}"
 
-    # إرسال النص إلى Gemini
     response = client.models.generate_content(
         model="gemini-1.5-flash",
         contents=full_prompt
